@@ -27,11 +27,11 @@ def train_and_save_model(data_path, models_dir):
 
     pipeline = Pipeline(steps=[
         ('preprocessor', preprocessor),
-        ('classifier', AdaBoostClassifier(estimator=base_estimator, algorithm='SAMME', random_state=42))
+        ('classifier', AdaBoostClassifier(estimator=base_estimator, random_state=42))
     ])
 
     param_grid = {
-        'classifier__n_estimators': [50, 100, 200],
+        'classifier__n_estimators': [100,200,300],
         'classifier__learning_rate': [0.01, 0.1, 1.0]
     }
 
