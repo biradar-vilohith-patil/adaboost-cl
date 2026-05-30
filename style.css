@@ -1,61 +1,103 @@
 .stApp {
-    background-color: #0f172a;
+    background-color: #0a0a0a;
     font-family: 'Inter', -apple-system, sans-serif;
-    color: #e2e8f0;
 }
 
-h1 {
-    color: #f8fafc !important;
-    font-weight: 800;
+.main-header {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 900;
     text-align: center;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.sub-header {
+    color: #888888;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 3rem;
 }
 
 div[data-baseweb="select"] > div, .stNumberInput input {
-    background-color: #1e293b !important;
-    border: 1px solid #334155 !important;
-    border-radius: 8px;
-    color: #f8fafc !important;
-    padding: 10px;
+    background-color: #121212 !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 6px;
+    color: #ffffff !important;
+    padding: 12px;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease;
 }
 
-div[data-baseweb="select"] > div:hover, .stNumberInput input:hover {
-    border-color: #3b82f6 !important;
+div[data-baseweb="select"] > div:hover, .stNumberInput input:hover, .stNumberInput input:focus {
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+label {
+    color: #a0a0a0 !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .stButton > button {
     width: 100%;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: #ffffff !important;
+    background-color: #ffffff;
+    color: #000000 !important;
     border: none;
-    padding: 18px;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    padding: 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .stButton > button:hover {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background-color: #e0e0e0;
     transform: translateY(-2px);
 }
 
-.stSuccess {
-    background-color: #064e3b;
-    border: 1px solid #10b981;
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 20px;
+.result-card {
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 30px;
+    text-align: center;
 }
 
-.stWarning {
-    background-color: #78350f;
-    border: 1px solid #d97706;
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 20px;
+.success-card {
+    background-color: #051f11;
+    border: 1px solid #0f5132;
 }
 
-.stSuccess p, .stWarning p {
-    color: #ffffff !important;
+.error-card {
+    background-color: #2b0808;
+    border: 1px solid #842029;
+}
+
+.result-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.success-card .result-title { color: #4ade80; }
+.error-card .result-title { color: #f87171; }
+
+.result-score {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.result-desc {
+    color: #b0b0b0;
+    font-size: 1rem;
+    line-height: 1.5;
 }
