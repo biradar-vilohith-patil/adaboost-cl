@@ -1,0 +1,61 @@
+.stApp {
+    background-color: #0f172a;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #e2e8f0;
+}
+
+h1 {
+    color: #f8fafc !important;
+    font-weight: 800;
+    text-align: center;
+}
+
+div[data-baseweb="select"] > div, .stNumberInput input {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+    border-radius: 8px;
+    color: #f8fafc !important;
+    padding: 10px;
+}
+
+div[data-baseweb="select"] > div:hover, .stNumberInput input:hover {
+    border-color: #3b82f6 !important;
+}
+
+.stButton > button {
+    width: 100%;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    border: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    transform: translateY(-2px);
+}
+
+.stSuccess {
+    background-color: #064e3b;
+    border: 1px solid #10b981;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.stWarning {
+    background-color: #78350f;
+    border: 1px solid #d97706;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.stSuccess p, .stWarning p {
+    color: #ffffff !important;
+}
