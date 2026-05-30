@@ -21,29 +21,51 @@ with col2:
     op_margin = st.number_input("Operating Profit Margin %", min_value=-100.0, max_value=100.0, value=18.0, step=1.0)
 
 if st.button("Initialize Fundamental Analysis"):
-    user_data = {
-        'returnOnEquity': roe / 100,
-        'Debt to Equity': debt_equity,
-        'PE ratio': pe_ratio,
-        'Revenue Growth': rev_growth / 100,
-        'operatingProfitMargin': op_margin / 100
-    }
-    
-    prediction, confidence = run_inference(user_data)
-    
-    if prediction == 1:
-        st.markdown(f"""
-        <div class='result-card success-card'>
-            <div class='result-title'>HIGH-CONVICTION MULTIBAGGER</div>
-            <div class='result-score'>{confidence:.1f}% Confidence</div>
-            <div class='result-desc'>The company's fundamentals demonstrate a strong economic moat. The balance sheet supports long-term wealth creation and sustainable compounding.</div>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
+    # 1. Hard Guardrails (The Sanity Check)
+    # Reject outright if Debt is toxic or ROE is terrible, regardless of the ML model
+    if debt_equity > 1.5:
         st.markdown(f"""
         <div class='result-card error-card'>
-            <div class='result-title'>VALUE TRAP / UNDERPERFORMER</div>
-            <div class='result-score'>{confidence:.1f}% Confidence</div>
-            <div class='result-desc'>Capital destruction risk detected. The fundamental metrics reflect poor capital allocation or excessive leverage. Avoid deployment.</div>
+            <div class='result-title'>AUTO-REJECT: TOXIC DEBT LEVEL</div>
+            <div class='result-score'>D/E Ratio: {debt_equity}</div>
+            <div class='result-desc'>This company is dangerously over-leveraged. High debt destroys long-term compounding. We do not need the AI to tell us this is a Value Trap.</div>
         </div>
         """, unsafe_allow_html=True)
+        
+    elif roe < 8.0:
+        st.markdown(f"""
+        <div class='result-card error-card'>
+            <div class='result-title'>AUTO-REJECT: POOR CAPITAL EFFICIENCY</div>
+            <div class='result-score'>ROE: {roe}%</div>
+            <div class='result-desc'>A Return on Equity below 8% means the company cannot generate meaningful returns on shareholder capital. Skip.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    else:
+        # 2. If it passes the sanity check, let the AI evaluate the nuance
+        user_data = {
+            'returnOnEquity': roe / 100,
+            'Debt to Equity': debt_equity,
+            'PE ratio': pe_ratio,
+            'Revenue Growth': rev_growth / 100,
+            'operatingProfitMargin': op_margin / 100
+        }
+        
+        prediction, confidence = run_inference(user_data)
+        
+        if prediction == 1:
+            st.markdown(f"""
+            <div class='result-card success-card'>
+                <div class='result-title'>HIGH-CONVICTION MULTIBAGGER</div>
+                <div class='result-score'>{confidence:.1f}% Confidence</div>
+                <div class='result-desc'>Fundamentals demonstrate a strong economic moat. The balance sheet supports long-term wealth creation and sustainable compounding.</div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+            <div class='result-card error-card'>
+                <div class='result-title'>VALUE TRAP / UNDERPERFORMER</div>
+                <div class='result-score'>{confidence:.1f}% Confidence</div>
+                <div class='result-desc'>Capital destruction risk detected by the model. Avoid deployment.</div>
+            </div>
+            """, unsafe_allow_html=True)
